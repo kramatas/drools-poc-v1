@@ -21,12 +21,12 @@ public class DroolsConfig {
         KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
 
         // Load the DRL file from the classpath as a Resource
-        Resource resource = kieServices.getResources().newClassPathResource("rules/phone-discount-rules.drl");
-        Resource resource1 = kieServices.getResources().newClassPathResource("rules/customer-discount-rules.drl");
+        Resource phoneDiscountResource = kieServices.getResources().newClassPathResource("rules/phone-discount-rules.drl");
+        Resource customerDiscountResource = kieServices.getResources().newClassPathResource("rules/customer-discount-rules.drl");
 
         // Write the DRL file to the KieFileSystem
-        kieFileSystem.write(resource);
-        kieFileSystem.write(resource1);
+        kieFileSystem.write(phoneDiscountResource);
+        kieFileSystem.write(customerDiscountResource);
 
         // Build the KieModule from the written files
         KieBuilder kieBuilder = kieServices.newKieBuilder(kieFileSystem);
