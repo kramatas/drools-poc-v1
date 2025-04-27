@@ -48,7 +48,7 @@ The rules are applied in order of priority using the `salience` attribute.
 ## To Run the Project
 1. Clone the repository:
    ```bash
-   git clone https://github.com/kramatas/drools-poc.git
+   git clone https://github.com/kramatas/drools-poc-v1.git
    cd drools-poc
    ```
 2. run docker-compose build --no-cache
@@ -67,5 +67,5 @@ The rules are applied in order of priority using the `salience` attribute.
 }
 
 ```
-5.## Phone Filtering API
+5.##Phone Filtering API
 refer to [CURLME.md](CURLME.md) for test scenarios and examples.
