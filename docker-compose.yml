@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  neo4j:
+    image: neo4j:5.15
+    container_name: neo4j
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      NEO4J_AUTH: neo4j/password
+    volumes:
+      - neo4j_data:/data
+
+  app:
+    build: .
+    container_name: drools-spring-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - neo4j
+    environment:
+      SPRING_NEO4J_URI: bolt://neo4j:7687
+      SPRING_NEO4J_AUTH_USERNAME: neo4j
+      SPRING_NEO4J_AUTH_PASSWORD: password
+
+volumes:
+  neo4j_data:

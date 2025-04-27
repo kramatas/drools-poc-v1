@@ -1,0 +1,42 @@
+package com.kramatas.rules;
+
+import com.kramatas.rules.model.Phone;
+import com.kramatas.rules.dto.PhoneFilterRequest;
+
+global PhoneFilterRequest request;
+global java.util.List matchedPhones;
+
+rule "Filter Phones Based on Request"
+    when
+        $phone: Phone()
+        $request: PhoneFilterRequest()
+    then
+        // Apply filters only if they are not null in the request
+        boolean match = true;
+
+        if ($request.getBrand() != null && !$phone.getBrand().equals($request.getBrand())) {
+            match = false;
+        }
+        if ($request.getSimType() != null && !$phone.getSimType().equals($request.getSimType())) {
+            match = false;
+        }
+        if ($request.getNetwork() != null && !$phone.getNetwork().equals($request.getNetwork())) {
+            match = false;
+        }
+        if ($request.getOperatingSystem() != null && !$phone.getOperatingSystem().equals($request.getOperatingSystem())) {
+            match = false;
+        }
+        if ($request.getDeal() != null && !$phone.getDeal().equals($request.getDeal())) {
+            match = false;
+        }
+
+        if ($request.getModel() != null && !$phone.getModel().equals($request.getModel())) {
+             match = false;
+        }
+
+        // If all non-null criteria match, insert the phone into the matched list
+        if (match) {
+            insert($phone);
+            matchedPhones.add($phone); // Add matched phone to the result list
+        }
+end

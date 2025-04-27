@@ -1,0 +1,33 @@
+package com.kramatas.rules
+
+import com.kramatas.rules.model.Customer;
+
+rule "Senior Discount"
+salience 20
+when
+    $c: Customer(age > 60, discount == 0)
+then
+    $c.setDiscount(20);
+    System.out.println("Applied senior discount (20%) to: " + $c.getName());
+    update($c);
+end
+
+rule "Loyal Customer Discount"
+salience 10
+when
+    $c: Customer(yearsWithCompany > 5, discount == 0)
+then
+    $c.setDiscount(15);
+    System.out.println("Applied loyal customer discount (15%) to: " + $c.getName());
+    update($c);
+end
+
+rule "Default Discount"
+salience -10
+when
+    $c: Customer(discount == 0)
+then
+    $c.setDiscount(5);
+    System.out.println("Applied default discount (5%) to: " + $c.getName());
+    update($c);
+end

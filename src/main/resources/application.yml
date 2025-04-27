@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: drools-spring-app
+  neo4j:
+    uri: ${SPRING_NEO4J_URI:bolt://localhost:7687}
+    authentication:
+      username: ${SPRING_NEO4J_AUTH_USERNAME:neo4j}
+      password: ${SPRING_NEO4J_AUTH_PASSWORD:password}
+  cache:
+    type: caffeine
+    cache-names:
+      - filteredPhones
+    caffeine:
+      spec: maximumSize=1000,expireAfterWrite=10m
+server:
+  port: 8080
